@@ -7,4 +7,4 @@ Using CIP, it is possible to open a stream on those different files and process 
 
 The type of the iterators should contain a field annotated with `@CorrelationKey` that will be used to find the correlations within all the iterators.
 
-See CorrelatedIterables to get started.
+See `CorrelatedIterables` to get started.
