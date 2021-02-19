@@ -48,6 +48,22 @@ Opening an iterator on those two streams and running them through CIP using **Ke
 | E | value16 |  | 
 | G |  | value27 | 
 
+The corresponding java code would be:
+
+```java
+CorrelatedIterables.correlate(
+    dataSet1.iterator(), EntryA.class,
+    dataSet1.iterator(), EntryB.class,
+    new CorrelationDoubleStreamConsumer<String, EntryA, EntryB>() {
+        @Override
+        public void consume(String key, List<EntryA> aElements, List<EntryB> bElements) {
+            //process the chunk
+        }
+    }
+);
+```
+
+
 
 ## Usage
 
