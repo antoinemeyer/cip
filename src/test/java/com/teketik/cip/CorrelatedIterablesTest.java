@@ -1,8 +1,8 @@
 package com.teketik.cip;
 
-import com.teketik.cip.CorrelatedIterables;
 import com.teketik.cip.CorrelatedIterables.CorrelationDoubleStreamConsumer;
 import com.teketik.cip.CorrelatedIterables.CorrelationQuadrupleStreamConsumer;
+import com.teketik.cip.CorrelatedIterables.CorrelationQuintupleStreamConsumer;
 import com.teketik.cip.CorrelatedIterables.CorrelationTripleStreamConsumer;
 
 import org.junit.jupiter.api.Assertions;
@@ -106,6 +106,45 @@ public class CorrelatedIterablesTest {
                         "1", CorrelatedIterableTest.listOf(testEntriesA.get(0), testEntriesD.get(0)),
                         "2", CorrelatedIterableTest.listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1), testEntriesD.get(1)),
                         "3", CorrelatedIterableTest.listOf(testEntriesB.get(1))
+                ),
+                resultMap
+        );
+    }
+
+
+    @Test
+    public void testQuintuple() {
+        final Map<String, List<Object>> resultMap = new HashMap<>();
+        final List<TestEntryA> testEntriesA = CorrelatedIterableTest.listOf(new TestEntryA("1"), new TestEntryA("2"));
+        final List<TestEntryB> testEntriesB = CorrelatedIterableTest.listOf(new TestEntryB("2"), new TestEntryB("3"));
+        final List<TestEntryC> testEntriesC = CorrelatedIterableTest.listOf(new TestEntryC("0"), new TestEntryC("2"));
+        final List<TestEntryD> testEntriesD = CorrelatedIterableTest.listOf(new TestEntryD("1"), new TestEntryD("2"));
+        final List<TestEntryE> testEntriesE = CorrelatedIterableTest.listOf(new TestEntryE("3"), new TestEntryE("3"));
+        CorrelatedIterables.correlate(
+                testEntriesA.iterator(), TestEntryA.class,
+                testEntriesB.iterator(), TestEntryB.class,
+                testEntriesC.iterator(), TestEntryC.class,
+                testEntriesD.iterator(), TestEntryD.class,
+                testEntriesE.iterator(), TestEntryE.class,
+                new CorrelationQuintupleStreamConsumer<String, TestEntryA, TestEntryB, TestEntryC, TestEntryD, TestEntryE>() {
+                    @Override
+                    public void consume(String key, List<TestEntryA> aElements, List<TestEntryB> bElements, List<TestEntryC> cElements, List<TestEntryD> dElements, List<TestEntryE> eElements) {
+                        final List<Object> arrayList = new ArrayList<>();
+                        arrayList.addAll(aElements);
+                        arrayList.addAll(bElements);
+                        arrayList.addAll(cElements);
+                        arrayList.addAll(dElements);
+                        arrayList.addAll(eElements);
+                        resultMap.put(key, arrayList);
+                    }
+                }
+        );
+        Assertions.assertEquals(
+                CorrelatedIterableTest.mapOf(
+                        "0", CorrelatedIterableTest.listOf(testEntriesC.get(0)),
+                        "1", CorrelatedIterableTest.listOf(testEntriesA.get(0), testEntriesD.get(0)),
+                        "2", CorrelatedIterableTest.listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1), testEntriesD.get(1)),
+                        "3", CorrelatedIterableTest.listOf(testEntriesB.get(1), testEntriesE.get(0), testEntriesE.get(1))
                 ),
                 resultMap
         );

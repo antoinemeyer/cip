@@ -94,6 +94,38 @@ public abstract class CorrelatedIterables {
         });
     }
 
+    public interface CorrelationQuintupleStreamConsumer<K extends Comparable, A, B, C, D, E> {
+        public void consume(K key, List<A> aElements, List<B> bElements, List<C> cElements, List<D> dElements, List<E> eElements);
+    }
+
+    public static <K extends Comparable, A, B, C, D, E> void correlate(
+            Iterator<A> iteratorA, Class<A> typeA,
+            Iterator<B> iteratorB, Class<B> typeB,
+            Iterator<C> iteratorC, Class<C> typeC,
+            Iterator<D> iteratorD, Class<D> typeD,
+            Iterator<E> iteratorE, Class<E> typeE,
+            CorrelationQuintupleStreamConsumer<K, A, B, C, D, E> streamConsumer
+    ) {
+        stream(
+                new CorrelatedIterable(
+                        new IteratorDefinition<A>(iteratorA, typeA),
+                        new IteratorDefinition<B>(iteratorB, typeB),
+                        new IteratorDefinition<C>(iteratorC, typeC),
+                        new IteratorDefinition<D>(iteratorD, typeD),
+                        new IteratorDefinition<E>(iteratorE, typeE)
+                )
+        ).forEach(payload -> {
+            streamConsumer.consume(
+                    (K) payload.getKey(),
+                    (List<A>) payload.getPayload().getOrDefault(typeA, Collections.emptyList()),
+                    (List<B>) payload.getPayload().getOrDefault(typeB, Collections.emptyList()),
+                    (List<C>) payload.getPayload().getOrDefault(typeC, Collections.emptyList()),
+                    (List<D>) payload.getPayload().getOrDefault(typeD, Collections.emptyList()),
+                    (List<E>) payload.getPayload().getOrDefault(typeE, Collections.emptyList())
+            );
+        });
+    }
+
     private static Stream<CorrelatedPayload> stream(final CorrelatedIterable correlatedIterables) {
         return StreamSupport.stream(
                 Spliterators.spliteratorUnknownSize(
