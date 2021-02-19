@@ -9,7 +9,7 @@ import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.function.Function;
 
-public class PeekableTransformingIteratorTest {
+public class PeekableEntryIteratorTest {
 
     @Test
     public void testOriginal() {
