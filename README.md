@@ -1,11 +1,13 @@
 # Correlated Iterators Processor
 
 The goal of this module is to offer a convenient and efficient way to iterate over correlated data contained within multiple sorted iterators.
+
 Each iteration of the resulting sorted stream allows the processing of the correlated data as a single unit of work. 
 
 ## Context
 
 It is frequent for banking institutions to make available flat CSV file containing account information such as positions, transactions, or other account information. Those files are usually sorted by account number and can become quite large which makes memory mounting impractical and key grouping inefficient.
+
 Using **Correlated Iterators Processor**, it is possible to open a stream on those different files and process all the data related to an account as a chunk.
 
 ## Example
@@ -36,6 +38,7 @@ Consider the two following data sets:
 | G	| value27 |
 
 Opening an iterator on those two streams and running them through CIP using **Key** as the **CorrelationKey** would allow the following processing:
+
 | Key  | Data Set 1 Values | Data Set 2 Values |
 | --- | --- |  --- |
 | A | | value21, value22 | 
@@ -44,6 +47,7 @@ Opening an iterator on those two streams and running them through CIP using **Ke
 | D | value14, value15 | value26 | 
 | E | value16 |  | 
 | G |  | value27 | 
+
 
 ## Usage
 
