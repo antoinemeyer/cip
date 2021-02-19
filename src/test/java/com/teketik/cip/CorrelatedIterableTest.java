@@ -1,18 +1,13 @@
 package com.teketik.cip;
 
-import com.teketik.cip.CorrelatedIterable;
-import com.teketik.cip.CorrelatedPayload;
-import com.teketik.cip.IteratorDefinition;
+import static com.teketik.cip.TestUtils.listOf;
+import static com.teketik.cip.TestUtils.mapOf;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class CorrelatedIterableTest {
 
@@ -98,36 +93,4 @@ public class CorrelatedIterableTest {
 
     }
 
-    //TODO move to utils
-    static <T, U> Map<T, U> mapOf(T t1, U u1) {
-        return Collections.singletonMap(t1, u1);
-    }
-
-    static <T, U> Map<T, U> mapOf(T t1, U u1, T t2, U u2) {
-        final HashMap<T, U> map = new HashMap<T, U>();
-        map.put(t1, u1);
-        map.put(t2, u2);
-        return map;
-    }
-
-    static <T, U> Map<T, U> mapOf(T t1, U u1, T t2, U u2, T t3, U u3) {
-        final HashMap<T, U> map = new HashMap<T, U>();
-        map.put(t1, u1);
-        map.put(t2, u2);
-        map.put(t3, u3);
-        return map;
-    }
-
-    static <T, U> Map<T, U> mapOf(T t1, U u1, T t2, U u2, T t3, U u3, T t4, U u4) {
-        final HashMap<T, U> map = new HashMap<T, U>();
-        map.put(t1, u1);
-        map.put(t2, u2);
-        map.put(t3, u3);
-        map.put(t4, u4);
-        return map;
-    }
-
-    static <T> List<T> listOf(T... ts) {
-        return Arrays.asList(ts);
-    }
 }

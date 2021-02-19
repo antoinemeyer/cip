@@ -1,5 +1,8 @@
 package com.teketik.cip;
 
+import static com.teketik.cip.TestUtils.listOf;
+import static com.teketik.cip.TestUtils.mapOf;
+
 import com.teketik.cip.CorrelatedIterables.CorrelationDoubleStreamConsumer;
 import com.teketik.cip.CorrelatedIterables.CorrelationQuadrupleStreamConsumer;
 import com.teketik.cip.CorrelatedIterables.CorrelationQuintupleStreamConsumer;
@@ -18,8 +21,8 @@ public class CorrelatedIterablesTest {
     @Test
     public void testDouble() {
         final Map<String, List<Object>> resultMap = new HashMap<>();
-        final List<TestEntryA> testEntriesA = CorrelatedIterableTest.listOf(new TestEntryA("1"), new TestEntryA("2"));
-        final List<TestEntryB> testEntriesB = CorrelatedIterableTest.listOf(new TestEntryB("2"), new TestEntryB("3"));
+        final List<TestEntryA> testEntriesA = listOf(new TestEntryA("1"), new TestEntryA("2"));
+        final List<TestEntryB> testEntriesB = listOf(new TestEntryB("2"), new TestEntryB("3"));
         CorrelatedIterables.correlate(
                 testEntriesA.iterator(), TestEntryA.class,
                 testEntriesB.iterator(), TestEntryB.class,
@@ -35,10 +38,10 @@ public class CorrelatedIterablesTest {
                 }
         );
         Assertions.assertEquals(
-                CorrelatedIterableTest.mapOf(
-                        "1", CorrelatedIterableTest.listOf(testEntriesA.get(0)),
-                        "2", CorrelatedIterableTest.listOf(testEntriesA.get(1), testEntriesB.get(0)),
-                        "3", CorrelatedIterableTest.listOf(testEntriesB.get(1))
+                mapOf(
+                        "1", listOf(testEntriesA.get(0)),
+                        "2", listOf(testEntriesA.get(1), testEntriesB.get(0)),
+                        "3", listOf(testEntriesB.get(1))
                 ),
                 resultMap
         );
@@ -47,9 +50,9 @@ public class CorrelatedIterablesTest {
     @Test
     public void testTriple() {
         final Map<String, List<Object>> resultMap = new HashMap<>();
-        final List<TestEntryA> testEntriesA = CorrelatedIterableTest.listOf(new TestEntryA("1"), new TestEntryA("2"));
-        final List<TestEntryB> testEntriesB = CorrelatedIterableTest.listOf(new TestEntryB("2"), new TestEntryB("3"));
-        final List<TestEntryC> testEntriesC = CorrelatedIterableTest.listOf(new TestEntryC("0"), new TestEntryC("2"));
+        final List<TestEntryA> testEntriesA = listOf(new TestEntryA("1"), new TestEntryA("2"));
+        final List<TestEntryB> testEntriesB = listOf(new TestEntryB("2"), new TestEntryB("3"));
+        final List<TestEntryC> testEntriesC = listOf(new TestEntryC("0"), new TestEntryC("2"));
         CorrelatedIterables.correlate(
                 testEntriesA.iterator(), TestEntryA.class,
                 testEntriesB.iterator(), TestEntryB.class,
@@ -66,11 +69,11 @@ public class CorrelatedIterablesTest {
                 }
         );
         Assertions.assertEquals(
-                CorrelatedIterableTest.mapOf(
-                        "0", CorrelatedIterableTest.listOf(testEntriesC.get(0)),
-                        "1", CorrelatedIterableTest.listOf(testEntriesA.get(0)),
-                        "2", CorrelatedIterableTest.listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1)),
-                        "3", CorrelatedIterableTest.listOf(testEntriesB.get(1))
+                mapOf(
+                        "0", listOf(testEntriesC.get(0)),
+                        "1", listOf(testEntriesA.get(0)),
+                        "2", listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1)),
+                        "3", listOf(testEntriesB.get(1))
                 ),
                 resultMap
         );
@@ -79,10 +82,10 @@ public class CorrelatedIterablesTest {
     @Test
     public void testQuadruple() {
         final Map<String, List<Object>> resultMap = new HashMap<>();
-        final List<TestEntryA> testEntriesA = CorrelatedIterableTest.listOf(new TestEntryA("1"), new TestEntryA("2"));
-        final List<TestEntryB> testEntriesB = CorrelatedIterableTest.listOf(new TestEntryB("2"), new TestEntryB("3"));
-        final List<TestEntryC> testEntriesC = CorrelatedIterableTest.listOf(new TestEntryC("0"), new TestEntryC("2"));
-        final List<TestEntryD> testEntriesD = CorrelatedIterableTest.listOf(new TestEntryD("1"), new TestEntryD("2"));
+        final List<TestEntryA> testEntriesA = listOf(new TestEntryA("1"), new TestEntryA("2"));
+        final List<TestEntryB> testEntriesB = listOf(new TestEntryB("2"), new TestEntryB("3"));
+        final List<TestEntryC> testEntriesC = listOf(new TestEntryC("0"), new TestEntryC("2"));
+        final List<TestEntryD> testEntriesD = listOf(new TestEntryD("1"), new TestEntryD("2"));
         CorrelatedIterables.correlate(
                 testEntriesA.iterator(), TestEntryA.class,
                 testEntriesB.iterator(), TestEntryB.class,
@@ -101,25 +104,24 @@ public class CorrelatedIterablesTest {
                 }
         );
         Assertions.assertEquals(
-                CorrelatedIterableTest.mapOf(
-                        "0", CorrelatedIterableTest.listOf(testEntriesC.get(0)),
-                        "1", CorrelatedIterableTest.listOf(testEntriesA.get(0), testEntriesD.get(0)),
-                        "2", CorrelatedIterableTest.listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1), testEntriesD.get(1)),
-                        "3", CorrelatedIterableTest.listOf(testEntriesB.get(1))
+                mapOf(
+                        "0", listOf(testEntriesC.get(0)),
+                        "1", listOf(testEntriesA.get(0), testEntriesD.get(0)),
+                        "2", listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1), testEntriesD.get(1)),
+                        "3", listOf(testEntriesB.get(1))
                 ),
                 resultMap
         );
     }
 
-
     @Test
     public void testQuintuple() {
         final Map<String, List<Object>> resultMap = new HashMap<>();
-        final List<TestEntryA> testEntriesA = CorrelatedIterableTest.listOf(new TestEntryA("1"), new TestEntryA("2"));
-        final List<TestEntryB> testEntriesB = CorrelatedIterableTest.listOf(new TestEntryB("2"), new TestEntryB("3"));
-        final List<TestEntryC> testEntriesC = CorrelatedIterableTest.listOf(new TestEntryC("0"), new TestEntryC("2"));
-        final List<TestEntryD> testEntriesD = CorrelatedIterableTest.listOf(new TestEntryD("1"), new TestEntryD("2"));
-        final List<TestEntryE> testEntriesE = CorrelatedIterableTest.listOf(new TestEntryE("3"), new TestEntryE("3"));
+        final List<TestEntryA> testEntriesA = listOf(new TestEntryA("1"), new TestEntryA("2"));
+        final List<TestEntryB> testEntriesB = listOf(new TestEntryB("2"), new TestEntryB("3"));
+        final List<TestEntryC> testEntriesC = listOf(new TestEntryC("0"), new TestEntryC("2"));
+        final List<TestEntryD> testEntriesD = listOf(new TestEntryD("1"), new TestEntryD("2"));
+        final List<TestEntryE> testEntriesE = listOf(new TestEntryE("3"), new TestEntryE("3"));
         CorrelatedIterables.correlate(
                 testEntriesA.iterator(), TestEntryA.class,
                 testEntriesB.iterator(), TestEntryB.class,
@@ -140,11 +142,11 @@ public class CorrelatedIterablesTest {
                 }
         );
         Assertions.assertEquals(
-                CorrelatedIterableTest.mapOf(
-                        "0", CorrelatedIterableTest.listOf(testEntriesC.get(0)),
-                        "1", CorrelatedIterableTest.listOf(testEntriesA.get(0), testEntriesD.get(0)),
-                        "2", CorrelatedIterableTest.listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1), testEntriesD.get(1)),
-                        "3", CorrelatedIterableTest.listOf(testEntriesB.get(1), testEntriesE.get(0), testEntriesE.get(1))
+                mapOf(
+                        "0", listOf(testEntriesC.get(0)),
+                        "1", listOf(testEntriesA.get(0), testEntriesD.get(0)),
+                        "2", listOf(testEntriesA.get(1), testEntriesB.get(0), testEntriesC.get(1), testEntriesD.get(1)),
+                        "3", listOf(testEntriesB.get(1), testEntriesE.get(0), testEntriesE.get(1))
                 ),
                 resultMap
         );
