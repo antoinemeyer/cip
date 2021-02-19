@@ -1,7 +1,5 @@
 package com.teketik.cip;
 
-import com.teketik.cip.CorrelationKey;
-
 abstract class TestEntry {
 
     @CorrelationKey

@@ -6,7 +6,7 @@ import java.util.Iterator;
  * {@link Iterable} that allows sequential iteration of multiple sorted {@link Iterator}s using a common {@link CorrelationKey}.<br>
  * @see CorrelatedIterables for convenient wrappers.
  */
-public class CorrelatedIterable implements Iterable<CorrelatedPayload> {
+public class CorrelatedIterable<K extends Comparable<K>> implements Iterable<CorrelatedPayload<K>> {
 
     private final IteratorDefinition<?>[] iterators;
 
@@ -15,11 +15,11 @@ public class CorrelatedIterable implements Iterable<CorrelatedPayload> {
     }
 
     @Override
-    public Iterator<CorrelatedPayload> iterator() {
+    public Iterator<CorrelatedPayload<K>> iterator() {
         return new CorrelatedIterator();
     }
 
-    private class CorrelatedIterator implements Iterator<CorrelatedPayload> {
+    private class CorrelatedIterator implements Iterator<CorrelatedPayload<K>> {
 
         @Override
         public boolean hasNext() {

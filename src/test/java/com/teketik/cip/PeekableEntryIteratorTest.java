@@ -1,7 +1,5 @@
 package com.teketik.cip;
 
-import com.teketik.cip.PeekableEntryIterator;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

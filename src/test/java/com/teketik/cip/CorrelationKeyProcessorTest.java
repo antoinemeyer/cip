@@ -11,7 +11,7 @@ public class CorrelationKeyProcessorTest {
     @Test
     public void testNoAnnotation() {
         try {
-            new CorrelationKeyProcessor(NoAnnotation.class);
+            new CorrelationKeyProcessor<>(NoAnnotation.class);
             Assertions.fail();
         } catch (Exception e) {
             Assertions.assertEquals(IllegalArgumentException.class, e.getClass());
@@ -27,7 +27,7 @@ public class CorrelationKeyProcessorTest {
     @Test
     public void testMultipleAnnotations() {
         try {
-            new CorrelationKeyProcessor(MultipleAnnotation.class);
+            new CorrelationKeyProcessor<>(MultipleAnnotation.class);
             Assertions.fail();
         } catch (Exception e) {
             Assertions.assertEquals(IllegalArgumentException.class, e.getClass());
@@ -37,7 +37,7 @@ public class CorrelationKeyProcessorTest {
 
     @Test
     public void testNullKey() {
-        final CorrelationKeyProcessor correlationKeyProcessor = new CorrelationKeyProcessor(TestEntryA.class);
+        final CorrelationKeyProcessor<TestEntryA> correlationKeyProcessor = new CorrelationKeyProcessor<>(TestEntryA.class);
         try {
             correlationKeyProcessor.apply(new TestEntryA(null));
             Assertions.fail();
@@ -49,7 +49,7 @@ public class CorrelationKeyProcessorTest {
 
     @Test
     public void testOk() {
-        final CorrelationKeyProcessor correlationKeyProcessor = new CorrelationKeyProcessor(TestEntryA.class);
+        final CorrelationKeyProcessor<TestEntryA> correlationKeyProcessor = new CorrelationKeyProcessor<>(TestEntryA.class);
         Assertions.assertEquals("key", correlationKeyProcessor.apply(new TestEntryA("key")));
     }
 
