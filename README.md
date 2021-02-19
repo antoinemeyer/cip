@@ -6,9 +6,9 @@ Each iteration of the resulting sorted stream allows the processing of the corre
 
 ## Context
 
-It is frequent for banking institutions to make available flat CSV file containing account information such as positions, transactions, or other account information. Those files are usually sorted by account number and can become quite large which makes memory mounting impractical and key grouping inefficient.
+It is frequent for banking institutions to make available flat CSV files containing account information such as positions, transactions and/or other account information. Those files are usually sorted by account number and can become too large to mount entirely in memory.
 
-Using **Correlated Iterators Processor**, it is possible to open a stream on those different files and process all the data related to an account as a chunk.
+Using **Correlated Iterators Processor**, it is possible to open a streamed iterator on those different files and process all the data related to an account as a chunk.
 
 ## Example
 
