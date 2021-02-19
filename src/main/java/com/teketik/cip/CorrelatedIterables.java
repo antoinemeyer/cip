@@ -20,15 +20,15 @@ public abstract class CorrelatedIterables {
         public void consume(K key, List<A> aElements, List<B> bElements);
     }
 
-    public static <K extends Comparable, A, B> void correlate(
+    public static <K extends Comparable<K>, A, B> void correlate(
             Iterator<A> iteratorA, Class<A> typeA,
             Iterator<B> iteratorB, Class<B> typeB,
             CorrelationDoubleStreamConsumer<K, A, B> streamConsumer
     ) {
         stream(
                 new CorrelatedIterable(
-                        new IteratorDefinition<A>(iteratorA, typeA),
-                        new IteratorDefinition<B>(iteratorB, typeB)
+                        new IteratorDefinition<K, A>(iteratorA, typeA),
+                        new IteratorDefinition<K, B>(iteratorB, typeB)
                 )
         ).forEach(payload -> {
             streamConsumer.consume(
@@ -43,7 +43,7 @@ public abstract class CorrelatedIterables {
         public void consume(K key, List<A> aElements, List<B> bElements, List<C> cElements);
     }
 
-    public static <K extends Comparable, A, B, C> void correlate(
+    public static <K extends Comparable<K>, A, B, C> void correlate(
             Iterator<A> iteratorA, Class<A> typeA,
             Iterator<B> iteratorB, Class<B> typeB,
             Iterator<C> iteratorC, Class<C> typeC,
@@ -51,9 +51,9 @@ public abstract class CorrelatedIterables {
     ) {
         stream(
                 new CorrelatedIterable(
-                        new IteratorDefinition<A>(iteratorA, typeA),
-                        new IteratorDefinition<B>(iteratorB, typeB),
-                        new IteratorDefinition<C>(iteratorC, typeC)
+                        new IteratorDefinition<K, A>(iteratorA, typeA),
+                        new IteratorDefinition<K, B>(iteratorB, typeB),
+                        new IteratorDefinition<K, C>(iteratorC, typeC)
                 )
         ).forEach(payload -> {
             streamConsumer.consume(
@@ -69,7 +69,7 @@ public abstract class CorrelatedIterables {
         public void consume(K key, List<A> aElements, List<B> bElements, List<C> cElements, List<D> dElements);
     }
 
-    public static <K extends Comparable, A, B, C, D> void correlate(
+    public static <K extends Comparable<K>, A, B, C, D> void correlate(
             Iterator<A> iteratorA, Class<A> typeA,
             Iterator<B> iteratorB, Class<B> typeB,
             Iterator<C> iteratorC, Class<C> typeC,
@@ -78,10 +78,10 @@ public abstract class CorrelatedIterables {
     ) {
         stream(
                 new CorrelatedIterable(
-                        new IteratorDefinition<A>(iteratorA, typeA),
-                        new IteratorDefinition<B>(iteratorB, typeB),
-                        new IteratorDefinition<C>(iteratorC, typeC),
-                        new IteratorDefinition<D>(iteratorD, typeD)
+                        new IteratorDefinition<K, A>(iteratorA, typeA),
+                        new IteratorDefinition<K, B>(iteratorB, typeB),
+                        new IteratorDefinition<K, C>(iteratorC, typeC),
+                        new IteratorDefinition<K, D>(iteratorD, typeD)
                 )
         ).forEach(payload -> {
             streamConsumer.consume(
@@ -98,7 +98,7 @@ public abstract class CorrelatedIterables {
         public void consume(K key, List<A> aElements, List<B> bElements, List<C> cElements, List<D> dElements, List<E> eElements);
     }
 
-    public static <K extends Comparable, A, B, C, D, E> void correlate(
+    public static <K extends Comparable<K>, A, B, C, D, E> void correlate(
             Iterator<A> iteratorA, Class<A> typeA,
             Iterator<B> iteratorB, Class<B> typeB,
             Iterator<C> iteratorC, Class<C> typeC,
@@ -108,11 +108,11 @@ public abstract class CorrelatedIterables {
     ) {
         stream(
                 new CorrelatedIterable(
-                        new IteratorDefinition<A>(iteratorA, typeA),
-                        new IteratorDefinition<B>(iteratorB, typeB),
-                        new IteratorDefinition<C>(iteratorC, typeC),
-                        new IteratorDefinition<D>(iteratorD, typeD),
-                        new IteratorDefinition<E>(iteratorE, typeE)
+                        new IteratorDefinition<K, A>(iteratorA, typeA),
+                        new IteratorDefinition<K, B>(iteratorB, typeB),
+                        new IteratorDefinition<K, C>(iteratorC, typeC),
+                        new IteratorDefinition<K, D>(iteratorD, typeD),
+                        new IteratorDefinition<K, E>(iteratorE, typeE)
                 )
         ).forEach(payload -> {
             streamConsumer.consume(

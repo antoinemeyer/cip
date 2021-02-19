@@ -7,7 +7,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to indicate the field to be used as correlation key when grouping the iterator entries.
+ * Annotation to indicate the field to be used as correlation key when grouping the iterator entries.<br>
+ * <strong>Should be {@link Comparable}</strong>.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

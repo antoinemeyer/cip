@@ -5,12 +5,14 @@ import java.util.Iterator;
 /**
  * {@link Iterable} that allows sequential iteration of multiple sorted {@link Iterator}s using a common {@link CorrelationKey}.<br>
  * @see CorrelatedIterables for convenient wrappers.
+ * @param <K> the type of the key
  */
 public class CorrelatedIterable<K extends Comparable<K>> implements Iterable<CorrelatedPayload<K>> {
 
-    private final IteratorDefinition<?>[] iterators;
+    private final IteratorDefinition<K, ?>[] iterators;
 
-    public CorrelatedIterable(IteratorDefinition<?>... iterators) {
+    @SafeVarargs
+    public CorrelatedIterable(IteratorDefinition<K, ?>... iterators) {
         this.iterators = iterators;
     }
 
@@ -23,7 +25,7 @@ public class CorrelatedIterable<K extends Comparable<K>> implements Iterable<Cor
 
         @Override
         public boolean hasNext() {
-            for (IteratorDefinition<?> iteratorDefinition : iterators) {
+            for (IteratorDefinition<K, ?> iteratorDefinition : iterators) {
                 if (iteratorDefinition.iterator.hasNext()) {
                     return true;
                 }
@@ -32,16 +34,16 @@ public class CorrelatedIterable<K extends Comparable<K>> implements Iterable<Cor
         }
 
         @Override
-        public CorrelatedPayload next() {
-            final Comparable nextProcessKey = determineNextProcessKey();
+        public CorrelatedPayload<K> next() {
+            final K nextProcessKey = determineNextProcessKey();
             return buildPayload(nextProcessKey);
         }
 
-        private Comparable determineNextProcessKey() {
-            Comparable lowestNextKey = null;
-            for (IteratorDefinition<?> iteratorDefinition : iterators) {
+        private K determineNextProcessKey() {
+            K lowestNextKey = null;
+            for (IteratorDefinition<K, ?> iteratorDefinition : iterators) {
                 if (iteratorDefinition.iterator.hasNext()) {
-                    final Comparable nextItemKey = iteratorDefinition.iterator.peekNext().getKey();
+                    final K nextItemKey = iteratorDefinition.iterator.peekNext().getKey();
                     if (lowestNextKey == null || nextItemKey.compareTo(lowestNextKey) < 0) {
                         lowestNextKey = nextItemKey;
                     }
@@ -50,9 +52,9 @@ public class CorrelatedIterable<K extends Comparable<K>> implements Iterable<Cor
             return lowestNextKey;
         }
 
-        private CorrelatedPayload buildPayload(final Comparable nextProcessKey) {
-            final CorrelatedPayload correlatedPayload = new CorrelatedPayload(nextProcessKey);
-            for (IteratorDefinition<?> iteratorDefinition : iterators) {
+        private CorrelatedPayload<K> buildPayload(final K nextProcessKey) {
+            final CorrelatedPayload<K> correlatedPayload = new CorrelatedPayload<>(nextProcessKey);
+            for (IteratorDefinition<K, ?> iteratorDefinition : iterators) {
                 while (
                         iteratorDefinition.iterator.hasNext()
                         &&

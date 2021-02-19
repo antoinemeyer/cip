@@ -37,7 +37,7 @@ public class CorrelationKeyProcessorTest {
 
     @Test
     public void testNullKey() {
-        final CorrelationKeyProcessor<TestEntryA> correlationKeyProcessor = new CorrelationKeyProcessor<>(TestEntryA.class);
+        final CorrelationKeyProcessor<String, TestEntryA> correlationKeyProcessor = new CorrelationKeyProcessor<>(TestEntryA.class);
         try {
             correlationKeyProcessor.apply(new TestEntryA(null));
             Assertions.fail();
@@ -49,7 +49,7 @@ public class CorrelationKeyProcessorTest {
 
     @Test
     public void testOk() {
-        final CorrelationKeyProcessor<TestEntryA> correlationKeyProcessor = new CorrelationKeyProcessor<>(TestEntryA.class);
+        final CorrelationKeyProcessor<String, TestEntryA> correlationKeyProcessor = new CorrelationKeyProcessor<>(TestEntryA.class);
         Assertions.assertEquals("key", correlationKeyProcessor.apply(new TestEntryA("key")));
     }
 

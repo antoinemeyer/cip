@@ -4,7 +4,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.function.Function;
 
-class CorrelationKeyProcessor<T> implements Function<T, Comparable<?>>{
+//TODO check if comparable
+class CorrelationKeyProcessor<K extends Comparable<K>, T> implements Function<T, K>{
 
     private final Field keyField;
 
@@ -34,7 +35,7 @@ class CorrelationKeyProcessor<T> implements Function<T, Comparable<?>>{
     }
 
     @Override
-    public Comparable apply(T object) {
+    public K apply(T object) {
         final Object keyValue;
         try {
             keyValue = keyField.get(object);
@@ -44,6 +45,6 @@ class CorrelationKeyProcessor<T> implements Function<T, Comparable<?>>{
         if (keyValue == null) {
             throw new IllegalArgumentException("Null key value in entry of " + object.getClass() + ".");
         }
-        return (String) keyValue;
+        return (K) keyValue;
     }
 }

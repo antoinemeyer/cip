@@ -24,9 +24,9 @@ public class CorrelatedIterableTest {
         final List<TestEntryB> testEntriesB = listOf(new TestEntryB("1"), new TestEntryB("1"), new TestEntryB("2"));
         final List<TestEntryC> testEntriesC = listOf(new TestEntryC("1"), new TestEntryC("2"), new TestEntryC("2"));
         final CorrelatedIterable<String> correlatedIterable = new CorrelatedIterable<>(
-                new IteratorDefinition<TestEntryA>(testEntriesA.iterator(), TestEntryA.class),
-                new IteratorDefinition<TestEntryB>(testEntriesB.iterator(), TestEntryB.class),
-                new IteratorDefinition<TestEntryC>(testEntriesC.iterator(), TestEntryC.class)
+                new IteratorDefinition<String, TestEntryA>(testEntriesA.iterator(), TestEntryA.class),
+                new IteratorDefinition<String, TestEntryB>(testEntriesB.iterator(), TestEntryB.class),
+                new IteratorDefinition<String, TestEntryC>(testEntriesC.iterator(), TestEntryC.class)
         );
         final Iterator<CorrelatedPayload<String>> iterator = correlatedIterable.iterator();
         Assertions.assertEquals(
@@ -53,8 +53,8 @@ public class CorrelatedIterableTest {
         final List<TestEntryA> testEntriesA = listOf(new TestEntryA("1"), new TestEntryA("2"), new TestEntryA("3"));
         final List<TestEntryB> testEntriesB = listOf(new TestEntryB("0"), new TestEntryB("1"), new TestEntryB("3"), new TestEntryB("4"));
         final CorrelatedIterable<String> correlatedIterable = new CorrelatedIterable<>(
-                new IteratorDefinition<TestEntryA>(testEntriesA.iterator(), TestEntryA.class),
-                new IteratorDefinition<TestEntryB>(testEntriesB.iterator(), TestEntryB.class)
+                new IteratorDefinition<String, TestEntryA>(testEntriesA.iterator(), TestEntryA.class),
+                new IteratorDefinition<String, TestEntryB>(testEntriesB.iterator(), TestEntryB.class)
         );
         final Iterator<CorrelatedPayload<String>> iterator = correlatedIterable.iterator();
         Assertions.assertEquals(

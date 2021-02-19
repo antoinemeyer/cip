@@ -12,7 +12,7 @@ public class PeekableEntryIteratorTest {
     @Test
     public void testOriginal() {
         final String[] source = new String[] {"1", "2", "3"};
-        final PeekableEntryIterator<String> peekableIterator = new PeekableEntryIterator<String>(
+        final PeekableEntryIterator<String, String> peekableIterator = new PeekableEntryIterator<>(
                 Arrays.asList(source).iterator(),
                 Function.identity()
         );
@@ -29,7 +29,7 @@ public class PeekableEntryIteratorTest {
     @Test
     public void testPeek() {
         final String[] source = new String[] {"1", "2", "3"};
-        final PeekableEntryIterator<String> peekableIterator = new PeekableEntryIterator<String>(
+        final PeekableEntryIterator<String, String> peekableIterator = new PeekableEntryIterator<>(
                 Arrays.asList(source).iterator(),
                 Function.identity()
         );

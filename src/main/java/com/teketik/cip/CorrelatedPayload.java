@@ -9,6 +9,7 @@ import java.util.Objects;
 /**
  * Output of an iteration of a {@link CorrelatedIterable}.<br/>
  * Contains the common {@link #key} shared by all correlated entries and all the entries stored as a map in {@link #payload}.<br/>
+ * @param <K> the type of the key
  */
 public class CorrelatedPayload<K extends Comparable<K>> {
 
