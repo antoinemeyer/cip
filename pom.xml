@@ -5,9 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.teketik</groupId>
     <artifactId>cip</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Correlated Iterators Processor</name>
+    <description>Sequentially process correlated data from sorted iterators.</description>
     <url>https://github.com/antoinemeyer/correlated-iterators-processor</url>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Antoine Meyer</name>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -22,8 +36,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-
 
     <build>
         <plugins>
