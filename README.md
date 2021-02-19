@@ -2,7 +2,7 @@
 
 The goal of this module is to offer a convenient and efficient way to iterate over correlated data contained within multiple sorted iterators.
 
-Each iteration of the resulting sorted stream allows the processing of the correlated data as a single unit of work. 
+Each sequential iteration of the resulting sorted stream allows the processing of the correlated data as a single unit of work. 
 
 ## Context
 
@@ -53,7 +53,7 @@ The corresponding java code would be:
 ```java
 CorrelatedIterables.correlate(
     dataSet1.iterator(), EntryA.class,
-    dataSet1.iterator(), EntryB.class,
+    dataSet2.iterator(), EntryB.class,
     new CorrelationDoubleStreamConsumer<String, EntryA, EntryB>() {
         @Override
         public void consume(String key, List<EntryA> aElements, List<EntryB> bElements) {
@@ -67,9 +67,9 @@ CorrelatedIterables.correlate(
 
 ## Usage
 
-`CorrelatedIterables` contains a collection of convenient iterators to process multiple correlated iterators.
+[CorrelatedIterables](src/main/java/com/teketik/cip/CorrelatedIterables.java) contains a collection of convenient iterators to process multiple correlated iterators.
 
-The java classes iterated should contain a field annotated with `@CorrelationKey` that will be used to find the correlations within all the iterators.
+The java classes iterated should contain a field annotated with [@CorrelationKey](src/main/java/com/teketik/cip/CorrelationKey.java) that will be used to find the correlations within all the iterators.
 
 
 
