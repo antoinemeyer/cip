@@ -47,6 +47,27 @@ public class CorrelationKeyProcessorTest {
         }
     }
 
+    private class NotComparable {
+        @CorrelationKey Object key1 = new Object() {
+            @Override
+            public String toString() {
+                return "{not comparable object}";
+            }
+        };
+    }
+
+    @Test
+    public void testNotComparable() {
+        final CorrelationKeyProcessor<String, NotComparable> correlationKeyProcessor = new CorrelationKeyProcessor<>(NotComparable.class);
+        try {
+            correlationKeyProcessor.apply(new NotComparable());
+            Assertions.fail();
+        } catch (Exception e) {
+            Assertions.assertEquals(IllegalArgumentException.class, e.getClass());
+            Assertions.assertEquals("{not comparable object} in class com.teketik.cip.CorrelationKeyProcessorTest$NotComparable is not Comparable.", e.getMessage());
+        }
+    }
+
     @Test
     public void testOk() {
         final CorrelationKeyProcessor<String, TestEntryA> correlationKeyProcessor = new CorrelationKeyProcessor<>(TestEntryA.class);
