@@ -36,7 +36,7 @@ class PeekableEntryIterator<T> implements Iterator<SimpleEntry<Comparable, T>> {
     @Override
     public SimpleEntry<Comparable, T> next() {
         if (last != null) {
-            SimpleEntry<Comparable, T> lastTmp = last;
+            final SimpleEntry<Comparable, T> lastTmp = last;
             last = null;
             return lastTmp;
         } else {
