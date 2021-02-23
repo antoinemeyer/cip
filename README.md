@@ -67,7 +67,18 @@ CorrelatedIterables.correlate(
 
 ## Usage
 
-[CorrelatedIterables](src/main/java/com/teketik/cip/CorrelatedIterables.java) contains a collection of convenient iterators to process multiple correlated iterators.
+**Maven dependency:**
+```
+<dependency>
+  <groupId>com.teketik</groupId>
+  <artifactId>cip</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
+**Main classes:**
+
+[CorrelatedIterables](src/main/java/com/teketik/cip/CorrelatedIterables.java) contains a collection of convenient iterators to process multiple correlated iterators. If this does not contain what you need, have a look at [CorrelatedIterable](https://github.com/antoinemeyer/correlated-iterators-processor/blob/master/src/main/java/com/teketik/cip/CorrelatedIterable.java)
 
 The java classes iterated should contain a field annotated with [@CorrelationKey](src/main/java/com/teketik/cip/CorrelationKey.java) that will be used to find the correlations within all the iterators.
 
