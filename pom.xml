@@ -9,6 +9,11 @@
     <name>Correlated Iterators Processor</name>
     <description>Sequentially process correlated data from sorted iterators.</description>
     <url>https://github.com/antoinemeyer/correlated-iterators-processor</url>
+    <scm>
+        <url>https://github.com/antoinemeyer/correlated-iterators-processor</url>
+        <connection>scm:git:git://github.com/antoinemeyer/correlated-iterators-processor.git</connection>
+        <developerConnection>scm:git:git@github.com:antoinemeyer/correlated-iterators-processor.git</developerConnection>
+    </scm>
 
     <licenses>
         <license>
